@@ -1,4 +1,12 @@
+<h1>Ajout d'un nouveau joueur</h1>
+
 <%= form_for player do |f| %>
+    <div>
+    <%= label_tag 'Pseudo : ' %>
+
     <%= f.text_field :pseudo %>
-    <%= f.submit %>
+        <%= f.submit 'Ajouter joueur', :class => 'button' %>
+    </div>
 <% end %>
+<br />
+<%= link_to 'Retour à l\'accueil',  root_path %>

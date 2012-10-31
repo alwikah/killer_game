@@ -59,5 +59,17 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
+  def clean_games
+    games = Game.all
+    games.each do |game|
+      wrong_game_items = game.game_items.select{|gi| gi.player.nil? || gi.victim.nil? || gi.mission.nil?}
+      game.delete unless wrong_game_items.empty?
+    end
+
+    respond_to do |format|
+      format.html{redirect_to root_path}
+    end
+  end
+
 
 end

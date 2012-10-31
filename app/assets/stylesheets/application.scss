@@ -1,0 +1,63 @@
+body{
+  background: #cfebf3;
+}
+
+#container{
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+  background: white;
+  padding: 30px;
+  border-radius: 40px;
+
+table{
+  padding: 20px;
+  th {
+  	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
+  	sans-serif;
+  	color: #6D929B;
+  	border-right: 1px solid #C1DAD7;
+  	border-bottom: 1px solid #C1DAD7;
+  	border-top: 1px solid #C1DAD7;
+  	letter-spacing: 2px;
+  	text-transform: uppercase;
+  	text-align: center;
+  	padding: 6px 6px 6px 12px;
+  	background: #CAE8EA url(images/bg_header.jpg) no-repeat;
+  }
+
+  td {
+  	border-right: 1px solid #C1DAD7;
+  	border-left: 1px solid #C1DAD7;
+  	border-bottom: 1px solid #C1DAD7;
+  	background: #fff;
+  	padding: 6px 6px 6px 12px;
+  	color: #6D929B;
+  }
+
+  td.alt {
+  	background: #F5FAFA;
+  	color: #B4AA9D;
+  }
+}
+
+}
+
+.button {
+	background:#00A0D1;
+	background:-moz-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#00A0D1),color-stop(100%,#008DB8));
+	background:-webkit-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-o-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-ms-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
+	padding:8px 20px;
+	color:#cfebf3;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:13px;
+	border-radius:40px;
+	-moz-border-radius:40px;
+	-webkit-border-radius:40px;
+	border:1px solid #095B7E;
+}

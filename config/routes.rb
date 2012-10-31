@@ -53,7 +53,7 @@ KillerGame::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'games#index'
-  #match 'launch_game' => 'game#launch_game'
+  match 'clean_games' => 'game#clean_games'
   #match 'init_game' => 'game#init_game'
 
   # See how all your routes lay out with "rake routes"

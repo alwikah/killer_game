@@ -1,5 +1,13 @@
-<%= form_for mission do |f| %>
-    <%= f.text_area :description %>
+<h1>Nouvelle mission</h1>
 
-    <%= f.submit %>
+<%= form_for mission do |f| %>
+    <div>
+    <%= label_tag 'Description : ' %>
+    </div>
+    <%= f.text_area :description %>
+    <div>
+      <%= f.submit 'Ajouter mission', :class => 'button' %>
+    </div>
 <% end %>
+<br />
+<%= link_to 'Retour à l\'accueil',  root_path %>

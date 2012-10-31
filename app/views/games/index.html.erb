@@ -16,7 +16,7 @@
   </tbody>
 </table>
 
-<%= link_to 'Ajouter un joueur', new_player_path %>
+<%= link_to 'Ajouter un joueur', new_player_path, :class => 'button' %>
 
 <h3>Les missions disponibles :</h3>
 
@@ -33,17 +33,18 @@
       </tr>
   <% end %>
 </table>
-<%= link_to 'Ajouter une mission', new_mission_path %>
+<%= link_to 'Ajouter une mission', new_mission_path, :class => 'button' %>
 </div>
 
 <div>
   <h3>Les jeux précédents :</h3>
   <ul>
+
     <% @games.each do |game| %>
        <li><%= link_to "Lancer le jeu n°#{game.id}", game_path(game) %> - <%= link_to 'Supprimer ce jeu', game_path(game), :method => :delete %></li>
     <% end %>
   </ul>
-<%= link_to 'Lancer un nouveau jeu !', games_path, :method => :post %>
+<%= link_to 'Lancer un nouveau jeu !', games_path, :method => :post, :class => 'button' %>
 </div>
 <% if @message %>
 <p>
