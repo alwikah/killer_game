@@ -1,0 +1,23 @@
+<table>
+  <thead>
+  <th>Joueur</th>
+  <th>Victime</th>
+  <th>Mission</th>
+  </thead>
+  <tbody>
+  <% @players.each_with_index do |player, index| %>
+      <tr>
+        <td><%= player.pseudo %></td>
+        <% if index < @players.count - 1 %>
+            <td><%= @players[index + 1].pseudo %></td>
+            <td><%= @players[index + 1].weak_point.description %></td>
+        <% else %>
+            <td><%= @players[0].pseudo %></td>
+            <td><%= @players[0].weak_point.description %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Retour Jeu',  root_path %>

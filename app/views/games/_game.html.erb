@@ -1,0 +1,20 @@
+<%= stylesheet_link_tag "game" %>
+
+<table>
+  <thead>
+  <th>Joueur</th>
+  <th>Victime</th>
+  <th>Mission</th>
+  </thead>
+  <tbody>
+  <% @game.sorted_game_items.each do |game_item| %>
+      <tr>
+        <td><%= game_item.player.pseudo %></td>
+        <td><%= game_item.victim.pseudo %></td>
+        <td><%= game_item.mission.try(:description) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Retour Jeu',  root_path %>

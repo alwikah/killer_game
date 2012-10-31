@@ -1,0 +1,28 @@
+#    Postgresql database.yml file
+common: &common
+  adapter: postgresql
+  username: postgres
+  password: Lullaby
+  host: localhost
+  pool: 5
+
+development:
+  <<: *common
+  adapter: postgresql
+  username: postgres
+  password: Lullaby
+  database: killer_game_development
+
+test:
+  <<: *common
+  adapter: postgresql
+  username: postgres
+  password: Lullaby
+  database: killer_game_test
+
+production:
+  <<: *common
+  adapter: postgresql
+  username: postgres
+  password: Lullaby
+  database: killer_game_production
