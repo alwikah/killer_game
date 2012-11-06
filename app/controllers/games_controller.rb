@@ -2,13 +2,14 @@
 class GamesController < ApplicationController
   def index
     @missions = Mission.all
-    @players = Player.all
     @message = params.has_key?(:message) ? params[:message] : nil
     @games = Game.all
   end
 
   def create
-    @players = Player.all
+    @players = []
+    players_name = params[:players].select{|n| !n.blank?}
+
     @missions = Mission.all
 
     if @missions.count < @players.count
@@ -16,34 +17,14 @@ class GamesController < ApplicationController
         format.html{ redirect_to root_path(:message => "Il n'y a pas assez de missions, il en manque #{@players.count - @missions.count} pour pouvoir lancer le jeu...")}
       end
     else
-      @game = Game.create
-
-      @players.shuffle!
-      @missions.shuffle!
-
-      @players.each_with_index do |player, index|
-        game_item = GameItem.new(:player => player, :game => @game, :mission => @missions.pop)
-        if(index < @players.count - 1)
-          game_item.victim = @players[index+1]
-        else
-          game_item.victim = @players[0]
-        end
-        game_item.save
-      end
+      @game = Game.create(:finished => false)
+      @game.launch_game(players_name, @missions.shuffle)
 
       respond_to do |format|
         format.html{redirect_to game_path(@game)}
       end
     end
   end
-
-  #def init_game
-  #  @players = Player.all
-  #  @players.each{|p| p.weak_point = nil; p.save}
-  #  respond_to do |format|
-  #    format.html{ redirect_to root_path(:message => "Jeu réinitialisé")}
-  #  end
-  #end
 
   def destroy
     game = Game.find(params[:id])
@@ -62,7 +43,7 @@ class GamesController < ApplicationController
   def clean_games
     games = Game.all
     games.each do |game|
-      wrong_game_items = game.game_items.select{|gi| gi.player.nil? || gi.victim.nil? || gi.mission.nil?}
+      wrong_game_items = game.game_items.select{|gi| gi.player.nil? || gi.next_game_item.nil? || gi.mission.nil?}
       game.delete unless wrong_game_items.empty?
     end
 
@@ -71,5 +52,8 @@ class GamesController < ApplicationController
     end
   end
 
+  def init_game
+
+  end
 
 end

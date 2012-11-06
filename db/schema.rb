@@ -11,24 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031173602) do
+ActiveRecord::Schema.define(:version => 20121106100315) do
 
   create_table "game_items", :force => true do |t|
-    t.integer "player_id"
-    t.integer "victim_id"
     t.integer "mission_id"
     t.integer "game_id"
+    t.integer "next_game_item_id"
+    t.boolean "killed"
+    t.string  "player"
   end
 
   create_table "games", :force => true do |t|
+    t.boolean "finished"
+    t.integer "winner_id"
   end
 
   create_table "missions", :force => true do |t|
     t.text "description"
-  end
-
-  create_table "players", :force => true do |t|
-    t.string "pseudo"
   end
 
 end

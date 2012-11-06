@@ -1,0 +1,12 @@
+<h1>Nouveau Jeu</h1>
+
+<h2>Liste des joueurs</h2>
+
+<%= form_tag games_path do %>
+    <%= link_to 'Ajouer un joueur', '#', :onclick => 'addPlayer(this);' %>
+    <div class="players">
+        <%= text_field_tag 'players[]' %>
+    </div>
+    <%= submit_tag 'Lancer le jeu' %>
+<% end %>
+

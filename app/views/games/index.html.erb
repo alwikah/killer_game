@@ -1,53 +1,53 @@
 <h1>Le jeu du Killer</h1>
-<div>
-<h3>Les joueurs enregistrés :</h3>
-<table>
-  <thead>
-  <th>Pseudo</th>
-  <th>Actions</th>
-  </thead>
-  <tbody>
-  <% @players.each do |player| %>
-      <tr>
-        <td><%= player.pseudo %></td>
-        <td><%= link_to 'Modifier', edit_player_path(player) %> - <%= link_to 'Supprimer', player_path(player), :method => :delete %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<%= link_to 'Ajouter un joueur', new_player_path, :class => 'button' %>
-
-<h3>Les missions disponibles :</h3>
-
-<table>
-  <thead>
-  <th>Description</th>
-  <th>Actions</th>
-  </thead>
-  <tbody>
-  <% @missions.each do |mission| %>
-      <tr>
-        <td><%= mission.description %></td>
-        <td><%= link_to 'Modifier', edit_mission_path(mission) %> - <%= link_to 'Supprimer', mission_path(mission), :method => :delete %></td>
-      </tr>
-  <% end %>
-</table>
-<%= link_to 'Ajouter une mission', new_mission_path, :class => 'button' %>
-</div>
 
 <div>
-  <h3>Les jeux précédents :</h3>
-  <ul>
+  <h3>Les jeux en cours :</h3>
 
+  <table>
+    <thead>
+    <th>Jeux</th>
+    <th>Gagnant</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
     <% @games.each do |game| %>
-       <li><%= link_to "Lancer le jeu n°#{game.id}", game_path(game) %> - <%= link_to 'Supprimer ce jeu', game_path(game), :method => :delete %></li>
+        <tr>
+          <% if game.finished? %>
+              <td>Jeu n°<%= game.id %> terminé</td>
+              <td><%= game.winner.try(:player) %></td>
+              <td><%= link_to 'Supprimer ce jeu', game_path(game), :method => :delete %> </td>
+          <% else %>
+              <td><%= link_to "Jeu n°#{game.id}", game_path(game) %></td>
+              <td></td>
+              <td><%= link_to 'Supprimer ce jeu', game_path(game), :method => :delete %></td>
+          <% end %>
+        </tr>
     <% end %>
-  </ul>
-<%= link_to 'Lancer un nouveau jeu !', games_path, :method => :post, :class => 'button' %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Lancer un nouveau jeu !', init_game_games_path, :class => 'button' %>
+</div>
+<div>
+  <h3>Les missions disponibles :</h3>
+
+  <table>
+    <thead>
+    <th>Description</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+    <% @missions.each do |mission| %>
+        <tr>
+          <td><%= mission.description %></td>
+          <td><%= link_to 'Modifier', edit_mission_path(mission) %> - <%= link_to 'Supprimer', mission_path(mission), :method => :delete %></td>
+        </tr>
+    <% end %>
+    </table>
+  <%= link_to 'Ajouter une mission', new_mission_path, :class => 'button' %>
 </div>
 <% if @message %>
-<p>
-<%= @message %>
-</p>
+    <p>
+      <%= @message %>
+    </p>
 <% end %>

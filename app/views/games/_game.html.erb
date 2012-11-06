@@ -1,20 +1,32 @@
 <%= stylesheet_link_tag "game" %>
 
-<table>
-  <thead>
-  <th>Joueur</th>
-  <th>Victime</th>
-  <th>Mission</th>
-  </thead>
-  <tbody>
-  <% @game.sorted_game_items.each do |game_item| %>
-      <tr>
-        <td><%= game_item.player.pseudo %></td>
-        <td><%= game_item.victim.pseudo %></td>
-        <td><%= game_item.mission.try(:description) %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<% if @game.finished? %>
+<div>
+  Le jeu est terminé, et le grand gagnant est : <%= @game.winner.try(:player) %>
+</div>
+<% else %>
+    <ul>
+      <% @game.game_items.sort_by{|gi| gi.player}.each do |game_item| %>
+          <li class="<%= game_item.killed? ? "dead" : "alive" %>"><%= link_to game_item.player, game_item_path(game_item) %></li>
+      <% end %>
+    </ul>
 
-<%= link_to 'Retour Jeu',  root_path %>
+    <table>
+      <thead>
+      <th>Joueur</th>
+      <th>Victime</th>
+      <th>Mission</th>
+      </thead>
+      <tbody>
+      <% @game.sorted_game_items.each do |game_item| %>
+          <tr>
+            <td><%= game_item.player %></td>
+            <td><%= game_item.next_game_item.player %></td>
+            <td><%= game_item.next_game_item.mission.try(:description) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<% end %>
+<%= link_to 'Retour Accueil',  root_path %>

@@ -13,9 +13,18 @@ KillerGame::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :players, :except => [:index]
+  resources :players, :except => [:index] do
+    get 'player_interface', :on => :member
+  end
+
   resources :missions, :except => [:index]
-  resources :games, :only => [:create, :show, :destroy]
+  resources :games, :only => [:create, :show, :destroy] do
+    get 'init_game', :on => :collection
+  end
+
+  resources :game_items, :only => [:show]
+
+  match 'game_items/:id/killed' => 'game_items#killed', :as => 'player_killed'
 
   # Sample resource route with options:
   #   resources :products do

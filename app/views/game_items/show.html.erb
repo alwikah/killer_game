@@ -1,0 +1,26 @@
+<%
+   player_pseudo = @game_item.player
+   victim_pseudo = @game_item.next_game_item.player
+   mission = @game_item.next_game_item.mission.description
+%>
+
+<h1>Fiche de Jeu</h1>
+<p class="player_pseudo"><%= player_pseudo %></p>
+
+<% if @game_item.killed? %>
+    TU ES MORT... MOUAHAHAHAAAA !!!
+<% else %>
+    <div>
+      <h2>Victime</h2>
+      <h2><%= victim_pseudo %></h2>
+      <h2>Mission</h2>
+      <p><%= mission %></p>
+    </div>
+
+    <%= link_to 'J\'ai été tué...', player_killed_path(@game_item) %>
+    <br />
+<% end %>
+
+<%= link_to 'Retour au jeu',  game_path(@game_item.game) %>
+<br />
+<%= link_to 'Retour à l\'accueil',  root_path %>

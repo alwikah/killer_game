@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+File.open('public/missions.txt', 'r') do |f|
+  f.each_line do |line|
+    Mission.create(:description => line)
+  end
+end

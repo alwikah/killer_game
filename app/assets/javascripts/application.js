@@ -13,3 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+var addPlayer = function(el){
+    var new_input = $("<br/><input id='players_' name='players[]' type='text'>");
+    var last_input = $(el).parent().find('div[class="players"]');
+    last_input.append(new_input);
+}
