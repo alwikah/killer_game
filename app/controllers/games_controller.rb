@@ -12,7 +12,11 @@ class GamesController < ApplicationController
 
     @missions = Mission.all
 
-    if @missions.count < @players.count
+    if players_name.count < 2
+      respond_to do |format|
+        format.html{ redirect_to root_path(:message => "Il faut un peu plus de joueurs pour pouvoir lancer le jeu...")}
+      end
+    elsif @missions.count < @players.count
       respond_to do |format|
         format.html{ redirect_to root_path(:message => "Il n'y a pas assez de missions, il en manque #{@players.count - @missions.count} pour pouvoir lancer le jeu...")}
       end
