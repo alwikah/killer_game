@@ -11,3 +11,5 @@ File.open('public/missions.txt', 'r') do |f|
     Mission.create(:description => line)
   end
 end
+
+User.create(:email => 'berlimioz@gmail.com', :password => 'password', :pseudo => 'Berlimioz')
